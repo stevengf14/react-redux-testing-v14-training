@@ -1,9 +1,11 @@
-import React, { Component } from 'react';
+import React from "react";
+import Header from "./Header";
+import { BrowserRouter as Router } from "react-router-dom";
 
-export default class App extends Component {
-  render() {
-    return (
-      <div>React simple starter</div>
-    );
-  }
+export default function App(props) {
+  return (
+    <Router>
+      <Header />
+    </Router>
+  );
 }
