@@ -4,6 +4,7 @@ import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 
+import requireAuth from "./components/require_authentication";
 import App from "./components/App";
 import Resources from "./components/Resources";
 import reducers from "./reducers";
