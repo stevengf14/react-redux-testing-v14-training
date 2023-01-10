@@ -1,12 +1,24 @@
-import React, { Component } from "react";
+import React from "react";
 import { connect } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 export default function requireAuth(ComposedComponent) {
-  class Authentication extends Component {
-    render() {
-      return <ComposedComponent {...this.props} />;
-    }
-  }
+  const Authentication = (props) => {
+    const navigate = useNavigate();
+
+    useEffect(() => {
+      shouldNavigateAway();
+    });
+
+    const shouldNavigateAway = () => {
+      if (!props.authenticated) {
+        navigate("/");
+      }
+    };
+
+    return <ComposedComponent {...props} />;
+  };
 
   function mapStateToProps(state) {
     return { authenticated: state.authenticated };
