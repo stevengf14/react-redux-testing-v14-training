@@ -4,10 +4,10 @@ import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 
 import App from "./components/App";
-
 import reducers from "./reducers";
+import Async from "./middlewares/async";
 
-const createStoreWithMiddleware = applyMiddleware()(createStore);
+const createStoreWithMiddleware = applyMiddleware(Async)(createStore);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
