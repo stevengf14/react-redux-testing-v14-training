@@ -1,27 +1,38 @@
 import React from "react";
-import { reduxForm } from "redux-form";
+import { connect } from "react-redux";
+import { Field, reduxForm } from "redux-form";
+import * as actions from "../../actions";
 import "../../style/style.css";
 
 function Singnin(props) {
+  const { handleSubmit } = props;
+
   const handleFormSubmit = (email, password) => {
-    console.log(email, password);
     //need to do something to log user in
+    props.signinUser({ email, password });
   };
 
-  const {
-    handleSubmit,
-    fields: { email, password },
-  } = props;
-
   return (
-    <form onSubmit={handleSubmit(handleFormSubmit.bind(this))}>
+    <form onSubmit={handleSubmit(handleFormSubmit)}>
       <fieldset className="form-group">
         <label>Email:</label>
-        <input {...email} className="form-control" />
+        <Field
+          className="form-control"
+          name="email"
+          type="text"
+          component="input"
+          autoComplete="none"
+        />
       </fieldset>
       <fieldset className="form-group">
         <label>Password:</label>
-        <input {...password} className="form-control" />
+        <Field
+          className="form-control"
+          name="password"
+          type="password"
+          component="input"
+          autoComplete="none"
+        />
       </fieldset>
       <button action="submit" className="btn btn-primary">
         Sign in
@@ -33,4 +44,4 @@ function Singnin(props) {
 export default reduxForm({
   form: "signin",
   fields: ["email", "password"],
-})(Singnin);
+})(connect(null, actions)(Singnin));
