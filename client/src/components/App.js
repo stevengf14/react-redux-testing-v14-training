@@ -1,11 +1,11 @@
 import React from "react";
 import Header from "./Header";
 
-function App() {
+function App(props) {
   return (
     <div>
       <Header />
-      App
+      {props.children}
     </div>
   );
 }

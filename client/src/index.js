@@ -5,6 +5,7 @@ import { createStore, applyMiddleware } from "redux";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 
 import App from "./components/App";
+import Signin from "./components/auth/Signin";
 import reducers from "./reducers";
 
 const createStoreWithMiddleware = applyMiddleware()(createStore);
@@ -16,6 +17,7 @@ root.render(
       <App>
         <Routes>
           <Route path="/" exact element={<App />} />
+          <Route path="/signin" exact element={<Signin />} />
         </Routes>
       </App>
     </BrowserRouter>
