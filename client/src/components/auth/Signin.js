@@ -1,15 +1,19 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Field, reduxForm } from "redux-form";
+import { useNavigate } from "react-router-dom";
 import * as actions from "../../actions";
 import "../../style/style.css";
 
 function Singnin(props) {
   const { handleSubmit } = props;
+  const navigate = useNavigate();
 
   const handleFormSubmit = (email, password) => {
     //need to do something to log user in
-    props.signinUser({ email, password });
+    props.signinUser({ email, password }, () => {
+      navigate("/feature");
+    });
   };
 
   return (
