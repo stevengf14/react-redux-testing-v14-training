@@ -5,15 +5,26 @@ import { useNavigate } from "react-router-dom";
 import * as actions from "../../actions";
 import "../../style/style.css";
 
-function Singnin(props) {
+function Signin(props) {
   const { handleSubmit } = props;
   const navigate = useNavigate();
 
   const handleFormSubmit = (email, password) => {
     //need to do something to log user in
-    props.signinUser({ email, password }, () => {
+    props.signin({ email, password }, () => {
       navigate("/feature");
     });
+  };
+
+  const renderAlert = () => {
+    if (props.errorMessage) {
+      return (
+        <div className="alert alert-danger">
+          <strong>Oops!</strong>
+          {props.errorMessage}
+        </div>
+      );
+    }
   };
 
   return (
@@ -38,6 +49,7 @@ function Singnin(props) {
           autoComplete="none"
         />
       </fieldset>
+      {renderAlert()}
       <button action="submit" className="btn btn-primary">
         Sign in
       </button>
@@ -45,7 +57,11 @@ function Singnin(props) {
   );
 }
 
+function mapStateToProps(state) {
+  return { errorMessage: state.auth.error };
+}
+
 export default reduxForm({
   form: "signin",
   fields: ["email", "password"],
-})(connect(null, actions)(Singnin));
+})(connect(mapStateToProps, actions)(Signin));
