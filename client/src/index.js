@@ -7,6 +7,7 @@ import reduxThunk from "redux-thunk";
 
 import App from "./components/App";
 import Signin from "./components/auth/Signin";
+import Signout from "./components/auth/Signout";
 import reducers from "./reducers";
 
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
@@ -19,6 +20,7 @@ root.render(
         <Routes>
           <Route path="/" exact element={<App />} />
           <Route path="/signin" exact element={<Signin />} />
+          <Route path="/signout" exact element={<Signout />} />
         </Routes>
       </App>
     </BrowserRouter>
