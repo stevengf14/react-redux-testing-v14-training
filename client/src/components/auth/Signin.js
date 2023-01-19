@@ -10,20 +10,22 @@ function Signin(props) {
   const navigate = useNavigate();
 
   const handleFormSubmit = (email, password) => {
-    //need to do something to log user in
-    props.signin({ email, password }, () => {
+    const response = props.signin(email, password);
+    if (response) {
       navigate("/feature");
-    });
+    }
   };
 
   const renderAlert = () => {
     if (props.errorMessage) {
       return (
         <div className="alert alert-danger">
-          <strong>Oops!</strong>
+          <strong>Oops! </strong>
           {props.errorMessage}
         </div>
       );
+    } else {
+      <div className="alert alert-danger">otro error</div>;
     }
   };
 
@@ -58,7 +60,7 @@ function Signin(props) {
 }
 
 function mapStateToProps(state) {
-  return { errorMessage: state.auth.error };
+  return { errorMessage: state.auth.errorMessage };
 }
 
 export default reduxForm({
