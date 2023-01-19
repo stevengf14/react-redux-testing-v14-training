@@ -1,23 +1,26 @@
 import axios from "axios";
-import { AUTH_USER, AUHT_ERROR } from "./types";
+import { AUTH_USER, UNAUTH_USER, AUHT_ERROR } from "./types";
+import { useNavigate } from "react-router-dom";
 
 const ROOT_URL = "http://localhost:3090";
 
-export const signinUser =
-  ({ email, password }, callback) =>
-  async (dispatch) => {
-    console.log("action", email, password);
+export function signin({ email, password }) {
+  return function (dispatch) {
     axios
       .post(`${ROOT_URL}/signin`, { email, password })
       .then((response) => {
+        console.log("success", response);
+
         localStorage.setItem("token", response.data.token);
+        useNavigate("/feature");
         dispatch({ type: AUTH_USER });
       })
-      .catch(() => {
+      .catch((error) => {
+        console.log("error", error);
         dispatch(authError("Bad Login Info"));
       });
-    callback();
   };
+}
 
 export const authError = (error) => {
   return {
@@ -25,3 +28,8 @@ export const authError = (error) => {
     payload: error,
   };
 };
+
+export function signout() {
+  localStorage.removeItem("token");
+  return { type: UNAUTH_USER };
+}
