@@ -4,12 +4,29 @@ nav {
 
 .navbar {
   position: relative;
-  display: flex;
+  display: block;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
+}
+
+.nav-item {
+  margin-top: -12px;
+}
+
+.navbar-nav .nav-link {
+  padding-right: 0;
+  padding-left: 0;
+}
+.nav-link {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: #0d6efd;
+  text-decoration: none;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out;
 }
 
 .bd-navbar .navbar-nav-scroll .navbar-nav {
@@ -49,6 +66,7 @@ li {
 .btn {
   display: inline-block;
   margin-bottom: 0;
+  margin-top: 10px;
   font-weight: 400;
   text-align: center;
   white-space: nowrap;
