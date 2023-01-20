@@ -1,5 +1,7 @@
 import React from "react";
+import { connect } from "react-redux";
 import { Field, reduxForm } from "redux-form";
+import { useNavigate } from "react-router-dom";
 import * as actions from "../../actions";
 import "../../style/style.css";
 
@@ -8,6 +10,7 @@ function Signup(props) {
     handleSubmit,
     fields: { email, password, passwordConfirm },
   } = props;
+  const navigate = useNavigate();
 
   const renderField = ({ input, label, type, meta: { touched, error } }) => (
     <div>
@@ -19,8 +22,27 @@ function Signup(props) {
     </div>
   );
 
+  const handleFormSubmit = (formProps) => {
+    props.signup(formProps, () => {
+      navigate("/feature");
+    });
+  };
+
+  const renderAlert = () => {
+    if (props.errorMessage) {
+      return (
+        <div className="alert alert-danger">
+          <strong>Oops! </strong>
+          {props.errorMessage}
+        </div>
+      );
+    } else {
+      <div className="alert alert-danger">Error</div>;
+    }
+  };
+
   return (
-    <form>
+    <form onSubmit={handleSubmit(handleFormSubmit)}>
       <fieldset className="form-group">
         <label>Email:</label>
         <Field
@@ -51,6 +73,7 @@ function Signup(props) {
           autoComplete="none"
         />
       </fieldset>
+      {renderAlert()}
       <button action="submit" className="btn btn-primary">
         Sign up!
       </button>
@@ -79,8 +102,12 @@ function validate(formProps) {
   return errors;
 }
 
+function mapStateToProps(state) {
+  return { errorMessage: state.auth.errorMessage };
+}
+
 export default reduxForm({
   form: "signup",
   fields: ["email", "password", "passwordConfirm"],
   validate,
-})(Signup);
+})(connect(mapStateToProps, actions)(Signup));

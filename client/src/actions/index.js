@@ -13,8 +13,25 @@ export const signin =
       });
       dispatch({ type: AUTH_USER });
       localStorage.setItem("token", response.data.token);
+      callback();
     } catch (error) {
       dispatch(authError("Bad Login Info"));
+    }
+  };
+
+export const signup =
+  ({ email, password }, callback) =>
+  async (dispatch) => {
+    try {
+      const response = await axios.post(`${ROOT_URL}/signup`, {
+        email,
+        password,
+      });
+      dispatch({ type: AUTH_USER });
+      localStorage.setItem("token", response.data.token);
+      callback();
+    } catch (error) {
+      dispatch(authError("Email in use"));
     }
   };
 

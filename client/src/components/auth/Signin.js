@@ -9,11 +9,10 @@ function Signin(props) {
   const { handleSubmit } = props;
   const navigate = useNavigate();
 
-  const handleFormSubmit = (email, password) => {
-    const response = props.signin(email, password);
-    if (response) {
+  const handleFormSubmit = (formProps) => {
+    props.signin(formProps, () => {
       navigate("/feature");
-    }
+    });
   };
 
   const renderAlert = () => {
@@ -25,7 +24,7 @@ function Signin(props) {
         </div>
       );
     } else {
-      <div className="alert alert-danger">otro error</div>;
+      <div className="alert alert-danger">Error</div>;
     }
   };
 
