@@ -27,7 +27,7 @@ function Signup(props) {
           className="form-control"
           name="email"
           type="text"
-          component="input"
+          component={renderField}
           autoComplete="none"
         />
       </fieldset>
@@ -47,7 +47,7 @@ function Signup(props) {
           className="form-control"
           name="passwordConfirm"
           type="password"
-          component="input"
+          component={renderField}
           autoComplete="none"
         />
       </fieldset>
@@ -60,6 +60,19 @@ function Signup(props) {
 
 function validate(formProps) {
   const errors = {};
+
+  if (!formProps.email) {
+    errors.email = "Email is necessary";
+  }
+
+  if (!formProps.password) {
+    errors.password = "Password is necessary";
+  }
+
+  if (!formProps.passwordConfirm) {
+    errors.passwordConfirm = "Password confirmation is necessary";
+  }
+
   if (formProps.password !== formProps.passwordConfirm) {
     errors.password = "Passwords must match";
   }
