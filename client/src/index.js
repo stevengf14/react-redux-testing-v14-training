@@ -19,7 +19,6 @@ root.render(
     <BrowserRouter>
       <App>
         <Routes>
-          <Route path="/" exact element={<App />} />
           <Route path="/signin" exact element={<Signin />} />
           <Route path="/signout" exact element={<Signout />} />
           <Route path="/signup" exact element={<Signup />} />

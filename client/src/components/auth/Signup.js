@@ -1,12 +1,24 @@
 import React from "react";
 import { Field, reduxForm } from "redux-form";
 import * as actions from "../../actions";
+import "../../style/style.css";
 
 function Signup(props) {
   const {
     handleSubmit,
     fields: { email, password, passwordConfirm },
   } = props;
+
+  const renderField = ({ input, label, type, meta: { touched, error } }) => (
+    <div>
+      <label>{label}</label>
+      <div>
+        <input {...input} placeholder={label} type={type} />
+        {touched && error && <div className="error">{error}</div>}
+      </div>
+    </div>
+  );
+
   return (
     <form>
       <fieldset className="form-group">
@@ -25,7 +37,7 @@ function Signup(props) {
           className="form-control"
           name="password"
           type="password"
-          component="input"
+          component={renderField}
           autoComplete="none"
         />
       </fieldset>
@@ -45,7 +57,17 @@ function Signup(props) {
     </form>
   );
 }
+
+function validate(formProps) {
+  const errors = {};
+  if (formProps.password !== formProps.passwordConfirm) {
+    errors.password = "Passwords must match";
+  }
+  return errors;
+}
+
 export default reduxForm({
   form: "signup",
   fields: ["email", "password", "passwordConfirm"],
+  validate,
 })(Signup);

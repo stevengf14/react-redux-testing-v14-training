@@ -105,3 +105,10 @@ li {
   background-color: #f8d7da;
   border-color: #f5c6cb;
 }
+
+.error {
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 0.875em;
+  color: #dc3545;
+}
