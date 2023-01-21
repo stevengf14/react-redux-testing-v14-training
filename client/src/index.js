@@ -10,6 +10,7 @@ import Signin from "./components/auth/Signin";
 import Signout from "./components/auth/Signout";
 import Signup from "./components/auth/Signup";
 import Feature from "./components/Feature";
+import Welcome from "./components/Welcome";
 import reducers from "./reducers";
 
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
@@ -20,6 +21,7 @@ root.render(
     <BrowserRouter>
       <App>
         <Routes>
+          <Route path="/" exact element={<Welcome />} />
           <Route path="/signin" exact element={<Signin />} />
           <Route path="/signout" exact element={<Signout />} />
           <Route path="/signup" exact element={<Signup />} />
