@@ -43,7 +43,19 @@ export const authError = (error) => {
   };
 };
 
-export function signout() {
+export const signout = () => {
   localStorage.removeItem("token");
   return { type: UNAUTH_USER };
-}
+};
+
+export const fetchMessage = () => {
+  return function (dispatch) {
+    axios
+      .get(ROOT_URL, {
+        headers: { authorization: localStorage.getItem("token") },
+      })
+      .then((resposne) => {
+        console.log(resposne);
+      });
+  };
+};
