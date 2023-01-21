@@ -1,5 +1,4 @@
 import axios from "axios";
-import { actionTypes } from "redux-form";
 import { AUTH_USER, UNAUTH_USER, AUTH_ERROR, FETCH_MESSAGE } from "./types";
 
 const ROOT_URL = "http://localhost:3090";
