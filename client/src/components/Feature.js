@@ -7,6 +7,10 @@ const Feature = (props) => {
   useEffect(() => {
     props.fetchMessage();
   });
-  return <div>This is a Feature!</div>;
+  return <div>{props.message}</div>;
 };
-export default connect(null, actions)(RequireAuth(Feature));
+
+function mapStateToProps(state) {
+  return { message: state.auth.message };
+}
+export default connect(mapStateToProps, actions)(RequireAuth(Feature));
